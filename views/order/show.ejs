@@ -1,0 +1,66 @@
+<%- include("../partials/header") %>
+
+    <div class="container">
+        <header class="jumbotron" style="margin-top: 10px;">
+            <div class="container">
+                <h1>
+                    <h1>This is Order
+                        <%= rows[0].order_num %> show page
+                    </h1>
+                    <h3>Customer ID:
+                        <%= rows[0].c_id %>
+                    </h3>
+                </h1>
+
+            </div>
+        </header>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">SUM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rows.forEach( order => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= order.prod_id %>
+                        </th>
+                        <td>
+                            <%= order.prod_name %>
+                        </td>
+                        <td>
+                            <%= order.quantity %>
+                        </td>
+                        <td>
+                            <%= order.price %>
+                        </td>
+                        <td>
+                            <%= order.SUM %>
+                        </td>
+
+
+                    </tr>
+
+                    <% }); %>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total Amount</td>
+                            <td>
+                                <%= rows[0].total_price %>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>

@@ -1,0 +1,58 @@
+<%- include("../partials/header") %>
+
+    <div class="container">
+        <h1 style="text-align: center;">Add new product</h1>
+        <div class="row">
+            <div style="width: 50%; margin: 25px auto;">
+                <form action="/product" method="POST">
+                    <div class="form-group">
+                        <label for="prod_name">Product Name</label>
+                        <input class="form-control" type="text" name="prod_name" id="prod_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="stock_quantity">Stock Quantity</label>
+                        <input class="form-control" type="number" name="stock_quantity" id="stock_quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="stock_quantity">Category</label>
+                        <select class="custom-select" name="category">
+                            <option selected>Select category</option>
+                            <option value="Vegetable">Vegetable</option>
+                            <option value="Fruit">Fruit</option>
+                            <option value="Meat">Meat</option>
+                            <option value="Seafood">Seafood</option>
+                            <option value="Dairy">Dairy</option>
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input class="form-control" type="number" name="price" id="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="require_time">Require Time</label>
+                        <input class="form-control" type="number" name="require_time" id="require_time">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input class="form-control" type="text" name="description" id="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Product Image</label>
+                        <input class="form-control" type="text" name="prod_photo" id="photo">
+                    </div>
+
+                    <!-- product descpription? -->
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>

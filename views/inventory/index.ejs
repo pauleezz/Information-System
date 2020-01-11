@@ -1,0 +1,56 @@
+<%- include("../partials/header") %>
+
+
+    <div class="container">
+        <header class="jumbotron" style="margin-top: 10px;">
+            <div class="container">
+                <h1>
+                    <h1>Inventory Index Page</h1>
+                </h1>
+                <a class="btn btn-primary btn-lg" href="/inventory/new">Add new Inventory</a>
+            </div>
+        </header>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Inventory ID</th>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Inventory Quantity</th>
+                    <th scope="col">Inventory Price</th>
+                    <th scope="col">Inventory Date</th>
+                    <th scope="col">Expiration Date</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% rows.forEach( inventory => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= inventory.i_id %>
+                        </th>
+                        <td>
+                            <%= inventory.prod_id %>
+                        </td>
+                        <td>
+                            <%= inventory.i_quantity %>
+                        </td>
+                        <td>
+                            <%= inventory.i_price %>
+                        </td>
+                        <td>
+                            <%= inventory.i_date %>
+                        </td>
+                        <td>
+                            <%= inventory.expiration_date %>
+                        </td>
+                    </tr>
+
+                    <% }); %>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>

@@ -1,0 +1,80 @@
+<%- include("../partials/header") %>
+
+    <div class="container">
+        <h1 style="text-align: center;">Add new order</h1>
+        <div class="row">
+            <div style="width: 50%; margin: 25px auto;">
+                <form action="/order" method="POST">
+                    <div class="form-group">
+                        <label for="c_id">Customer ID</label>
+                        <input class="form-control" type="number" name="c_id" id="c_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="stock_quantity">Delivery Option</label>
+                        <select class="custom-select" name="d_id">
+                            <option selected>Select Delivery</option>
+                            <option value="1">AA-normal</option>
+                            <option value="2">AA-expres</option>
+                            <option value="3">BB-normal</option>
+                            <option value="4">BB-express</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="num_input">Number of input</label>
+                        <input class="form-control num_input" type="number" name="num_input" id="num_input">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="order_date">Order Date</label>
+                        <input class="form-control" type="date" name="order_date" id="order_date">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Add Product</label>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" name="prod_id" class="form-control" placeholder="Product ID">
+                            </div>
+                            <div class="col">
+                                <input type="text" name="quantity" class="form-control" placeholder="Quantity">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group" id="enter">
+                        <input class="btn btn-primary btn-sm" type="button" value="Create New Product" id="add-more">
+                    </div>
+
+                    
+
+                    <div class="form-group" id="newElementId"></div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                    </div>
+            </div>
+
+            </form>
+            <script type="text/JavaScript">
+                let i = 1;
+                $(document).ready(function (){
+                    $('#add-more').click(function(){
+                        $("#newElementId").append([
+                        '<div class="form-group">'+
+                            '<label for="order_date">Add Order Product '+ i+'</label>'+
+                        '<div class="col">'+
+                            '<input type="text" class="form-control" placeholder="Product ID" name="['+i+']prod_id'+i+'">'+
+                        '</div>'+
+                        '<div class="col">'+
+                            '<input type="text" class="form-control" placeholder="Quantity" name="['+i+']quantity'+i+'">'+
+                        '</div>'+'</div>']);
+                        i++;
+                    });
+                });
+            
+            </script>
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+    <%- include("../partials/footer") %>

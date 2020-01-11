@@ -1,0 +1,41 @@
+<%- include("../partials/header") %>
+
+    <h1>This is
+        <%= rows.c_name %> show page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h4>Customer Name:
+                        <%= rows.c_name %>
+                    </h4>
+                    <h4>Password:
+                        <a class="btn btn-primary " href="/customer/<%= rows.c_id %>/edit">Change password</a>
+                    </h4>
+
+                    <h4>Birthday:
+                        <%= rows.birthday %>
+
+                    </h4>
+                    <h4>Gender:
+                        <%= rows.gender %>
+                    </h4>
+                    <h4>Phone:
+                        <%= rows.phone %>
+                    </h4>
+                    <h4>Email:
+                        <%= rows.email %>
+                    </h4>
+                    <h4>Address:
+                        <%= rows.address %>
+                    </h4>
+
+                    <a class="btn btn-warning delete-form " href="/customer/<%= rows.c_id %>/edit">Edit</a>
+                    <form class="delete-form " action="/customer/<%= rows.c_id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger btn-xs">Delete</button></form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/footer") %>

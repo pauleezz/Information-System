@@ -1,0 +1,43 @@
+<%- include("../partials/header") %>
+
+    <div class="container">
+        <h1 style="text-align: center;">Edit Inventory
+            <%= rows.i_id %>
+        </h1>
+        <div class="row">
+            <div style="width: 50%; margin: 25px auto;">
+                <form action="/customer/:id?_method=PUT" method="POST">
+                    <div class="form-group">
+                        <label for="prod_id">Product ID</label>
+                        <input class="form-control" type="number" name="prod_id" id="prod_id" value="<%= rows.prod_id %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="i_quantity">Inventory Quantity</label>
+                        <input class="form-control" type="number" name="i_quantity" id="i_quantity" value="<%= rows.i_quantity %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="i_price">Inventory Price</label>
+                        <input class="form-control" type="number" name="i_price" id="i_price" value="<%= rows.i_price %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="i_date">Inventory Date</label>
+                        <input class="form-control" type="date" name="i_date" id="i_date" value="<%= rows.i_date %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiration_date">Expiration Date</label>
+                        <input class="form-control" type="date" name="expiration_date" id="expiration_date" value="<%= rows.expiration_date %>">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>

@@ -1,0 +1,36 @@
+<%- include("../partials/header") %>
+
+    <h1>This is
+        <%= rows.prod_name %> show page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= rows.prod_photo %>" alt="">
+                <div class="caption">
+                    <h4>Product Name:
+                        <%= rows.prod_name %>
+                    </h4>
+                    <h4>Product Price: $
+                        <%= rows.price %>
+                    </h4>
+
+                    <h4>Stock Quantity:
+                        <%= rows.stock_quantity %>
+
+                    </h4>
+                    <h4>Expiration Date:
+                        <%= rows.expiration_date %>
+
+                    </h4>
+                    <p>
+                        <%= rows.description %>
+                    </p>
+                    <a class="btn btn-warning delete-form " href="/product/<%= rows.prod_id %>/edit">Edit</a>
+                    <form class="delete-form " action="/product/<%= rows.prod_id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger btn-xs">Delete</button></form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/footer") %>

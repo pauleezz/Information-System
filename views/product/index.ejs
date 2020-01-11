@@ -1,0 +1,54 @@
+<%- include("../partials/header") %>
+
+    <div class="container">
+        <header class="jumbotron" style="margin-top: 10px;">
+            <div class="container">
+                <h1>
+                    <h1>Product Index Page</h1>
+                </h1>
+                <a class="btn btn-primary btn-lg" href="/product/new">Add new Product</a>
+            </div>
+        </header>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Stock Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Require time</th>
+                    <th scope="col">More</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rows.forEach( product => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= product.prod_id %>
+                        </th>
+                        <td>
+                            <%= product.prod_name %>
+                        </td>
+                        <td>
+                            <%= product.stock_quantity %>
+                        </td>
+                        <td>
+                            <%= product.price %>
+                        </td>
+                        <td>
+                            <%= product.require_time %>
+                        </td>
+                        <td>
+                            <a href="/product/<%= product.prod_id %>" class="btn btn-primary">More info</a>
+                        </td>
+                    </tr>
+
+                    <% }); %>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>

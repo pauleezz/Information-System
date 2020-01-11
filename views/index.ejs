@@ -1,0 +1,340 @@
+<%- include("partials/header") %>
+
+<div class="container">
+    <header class="jumbotron" style="margin-top: 10px;">
+        <div class="container">
+            <h1>
+                Index
+            </h1>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto navmenu">
+            <li class="nav-item">
+              <a class="nav-link rfm" href="#">RFM Analysis</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link performance" href="#">Sales Performance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link category" href="#">Sales Category Analysis</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link coupon" href="#">Coupon Analysis</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link reorder" href="#">Re-order Point</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link expiration" href="#">Expiration Sales</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <hr>
+      <div id="rfm">
+            <table class="table table-bordered">
+                
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Customer ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">RFM</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% rows1.forEach( customer => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= customer.c_id %>
+                        </th>
+                        <td>
+                            <%= customer.c_name %>
+                        </td>
+                        <td>
+                            <%= customer.email %>
+                        </td>
+                        <td>
+                            <%= customer.rfm %>
+                        </td>
+                    </tr>
+
+                    <% }); %>
+
+            </tbody>
+        </table> 
+    </div>
+    
+
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="coupon" >
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Customer ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Last Order Date</th>
+                    <th scope="col">Last Days</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% rows4.forEach( customer => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= customer.c_id %>
+                        </th>
+                        <td>
+                            <%= customer.c_name %>
+                        </td>
+                        <td>
+                            <%= customer.email %>
+                        </td>
+                        <td>
+                            <%= customer.last_order_date%>
+                        </td>
+                        <td>
+                            <%= customer.last_days %>
+                        </td>
+                        
+                    </tr>
+
+                    <% }); %>
+
+            </tbody>
+        </table> 
+        <div>
+            <form>
+                <div class="form-group">
+                    <label for="choose_coupon">Choose Coupon to Send</label>
+            <select name="coupon" id="choose_coupon" class="custom-select">
+                <option value="tenoff">10 Percent Off</option>
+                <option value="twentyfiveoff">25 Percent Off</option>
+                <option value="twohundredoff">Birthday Coupon - $200 off</option>            
+            </select></div>
+                
+            <div class="row float-right"><button class="btn btn-primary ">Submit</button>
+            </div>
+            </form>
+            
+        </div>
+        
+        
+    </div>
+    <div id="reorder">
+            <table class="table table-bordered">
+                
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Predict</th>
+                    <th scope="col">Stock Quantity</th>
+                    <th scope="col">Reorder</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% rows5.forEach( product => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= product.prod_id %>
+                        </th>
+                        <td>
+                            <%= product.prod_name %>
+                        </td>
+                        <td>
+                            <%= product.predict %>
+                        </td>
+                        <td>
+                            <%= product.stock_quantity %>
+                        </td>
+                        <td>
+                            <%= product.reorder %>
+                        </td>
+                    </tr>
+
+                    <% }); %>
+
+            </tbody>
+        </table> 
+    </div>
+
+    <div id="expiration">
+            <table class="table table-bordered">
+                
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Expiration Date</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% rows6.forEach( product => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= product.prod_id %>
+                        </th>
+                        <td>
+                            <%= product.prod_name %>
+                        </td>
+                        <td>
+                            <%= product.date %>
+                        </td>
+                        
+                    </tr>
+
+                    <% }); %>
+
+            </tbody>
+        </table> 
+    </div>
+    
+
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    var rows2 = <%- rows2 %>;
+    var chartData = [];
+    chartData.push(['Year', 'Sales','Growth'])
+    for(var idx = 0; idx < rows2.length; ++idx) { 
+        temp = [];
+        let item = rows2[idx]; 
+        temp.push(item.MonthOnly); 
+        if (item.ThisMonthSales === null){
+            temp.push(0); 
+        }else{
+            temp.push(item.ThisMonthSales); 
+        }
+        if (item.Growth === null){
+            temp.push(0); 
+        }else{
+            temp.push(item.Growth); 
+        }
+        chartData.push(temp);
+    }
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable(chartData);
+
+        var options = {
+            title: 'Sales Performance',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+        }
+    </script>
+
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+        var rows3 = <%- rows3 %> ;
+        var pieChart = [];
+        pieChart.push(['Category','Quantity']);
+        for(var index = 0; index<rows3.length;index++){
+            let pieitem = Object.values(rows3[index]);
+            pieChart.push(pieitem)
+        }
+        
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable(pieChart);
+
+        var options = {
+          title: 'Sales Category Analysis'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+<script>
+   
+    $(".navmenu").on("click","li",function(){
+        $(".navmenu li.active").removeClass("active");
+        $(this).addClass("active");
+    })
+    $(document).ready(function(){
+        $(".rfm").click(function(){
+            $("#rfm").show();
+            $("#curve_chart").hide();
+            $("#piechart").hide();
+            $("#coupon").hide();
+            $("#reorder").hide();
+            $("#expiration").hide();
+        });
+        $(".performance").click(function(){
+            $("#rfm").hide();
+            $("#curve_chart").show();
+            $("#piechart").hide();
+            $("#coupon").hide();
+            $("#reorder").hide();
+            $("#expiration").hide();
+        });
+        $(".category").click(function(){
+            $("#rfm").hide();
+            $("#curve_chart").hide();
+            $("#piechart").show();
+            $("#coupon").hide();
+            $("#reorder").hide();
+            $("#expiration").hide();
+        });
+        $(".coupon").click(function(){
+            $("#rfm").hide();
+            $("#curve_chart").hide();
+            $("#piechart").hide();
+            $("#coupon").show();
+            $("#reorder").hide();
+            $("#expiration").hide();
+        });
+        $(".reorder").click(function(){
+            $("#rfm").hide();
+            $("#curve_chart").hide();
+            $("#piechart").hide();
+            $("#coupon").hide();
+            $("#expiration").hide();
+            $("#reorder").show();
+        });
+        $(".expiration").click(function(){
+            $("#rfm").hide();
+            $("#curve_chart").hide();
+            $("#piechart").hide();
+            $("#coupon").hide();
+            $("#reorder").hide();
+            $("#expiration").show();
+        });
+
+
+    })
+
+    </script>
+
+
+
+
+
+
+    
+<body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+
+    <%- include("partials/footer") %>
